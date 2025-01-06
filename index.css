@@ -1,0 +1,50 @@
+.div{
+    display:flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    height: 900px;
+    background-image: url("https://i.ibb.co/qNv7NxZ/pc.webp");
+    background-repeat: no-repeat;
+}
+.section{
+    height: 700px;
+    border-radius: 20px;
+    width: 85%;
+}
+.a{
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    opacity: 0.8;
+    background-color: white;
+}
+.b{
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: white;
+}
+.btn{
+    width:20%;
+}
+.inp{
+    background-color: white;
+    opacity: 1;
+    z-index: 1;
+}
+.font{
+    font-size: 5em;
+}
+.psuedo::after{
+ content: "°C";
+ font-size:2.5em;
+ transform: translate(5%,10%);
+}
+.time{
+    margin-top: -20px;
+    font-size: 1.15em;
+}
+.location{
+    position: relative;
+    top:29.5%;
+    left:5%;
+}
