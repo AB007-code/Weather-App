@@ -21,7 +21,7 @@
 .b{
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
-    background-color: white;
+    background-color: rgb(70, 67, 67);
 }
 .btn{
     width:20%;
@@ -47,4 +47,32 @@
     position: relative;
     top:29.5%;
     left:5%;
+}
+.btn1:hover{
+    color: rgb(60, 92, 233);
+}
+.btn2:hover{
+    color: rgb(60, 92, 233);
+}
+.btn3:hover{
+    background-color: rgb(235, 236, 245);
+}
+.btn4:hover{
+    background-color: rgb(235, 236, 245);
+}
+.h{
+    height:140px;
+    width:120px;
+    border-radius:20px;
+    background-color: aliceblue;
+}
+.k{
+    height:150px;
+    width:100%;
+    border-radius: 20px;
+    background-color: aliceblue;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding:10px;
 }
