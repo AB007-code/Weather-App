@@ -73,6 +73,6 @@
     background-color: aliceblue;
     display:flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     padding:10px;
 }
