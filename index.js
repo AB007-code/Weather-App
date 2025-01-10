@@ -19,12 +19,18 @@ const visibility = document.querySelector(".visibility")
 const visibilityRisk = document.querySelector(".visibilityRisk")
 const airQualityValue = document.querySelector(".airQualityValue")
 const airQualityRisk = document.querySelector(".airQualityRisk")
+const weekBtn = document.querySelector(".weekBtn")
+const todayBtn = document.querySelector(".todayBtn")
+const hrsData = document.querySelector(".hrsData")
 let city;
 let dayArr = []
+let timeArr = []
+let oldData;
 async function trackLocation(){
     try{
     const res = await fetch("https://geolocation-db.com/json/")
     const data = await res.json()
+    oldData = data
     data.city = "Bangalore"
     city = data.city;
     console.log(city)
@@ -40,6 +46,10 @@ async function trackLocation(){
      const sliceDay = dataDay.slice(0,6)
      sliceDay.forEach((ele)=>{
        dayArr.push(ele)
+     })
+     const x = data.days[0].hours
+     x.forEach((ele)=>{
+      timeArr.push(ele)
      })
      setData(data)
      console.log(sliceDay)
@@ -211,8 +221,23 @@ if(visibilityValue>=0 && visibilityValue<=0.03){
   visibilityRisk.textContent = "Very Clear Air"
   airQualityRisk.textContent = "Hazardous"
 }
-
-
+weekBtn.style.color = "blue"
+// todayBtn.addEventListener("click",()=>{
+//   let bag1 = "";
+//   let classDiv = document.createElement("div")
+//   classDiv.className = "row row-col-7 g-2"
+//   x.forEach((ele)=>{
+//    bag1+=`<div class="col">
+//          <div class="h">
+//            <div>${ele.datetime.slice(0,5)}</div>
+//            <div><img src=${linkSrc} class="img1" alt=""></div>
+//            <div>${ele.temp}°C</div>
+//          </div>
+//        </div>`
+//   })
+//   classDiv.innerHTML = bag1
+//   hrsData.innerHTML = classDiv
+//  })
 }
 btn.addEventListener("click",()=>{
   dayArr = []
@@ -237,7 +262,25 @@ btn.addEventListener("click",()=>{
       return `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${cityName}?unitGroup=metric&key=EJ6UBL2JEQGYB3AA4ENASN62J&contentType=json`
   }
 })
-
+function weekData(){
+  let data1 = oldData
+  return setData(data1)
+}
+weekBtn.addEventListener("click", weekData)
+// todayBtn.addEventListener("click",()=>{
+//  let bag1 = "";
+//  let classDiv = document.createElement("div")
+//  classDiv.className = "row row-col-7 g-2"
+//  x.forEach((ele)=>{
+//   bag1+=`<div class="col">
+//         <div class="h">
+//           <div>${day}</div>
+//           <div><img src=${linkSrc} class="img1" alt=""></div>
+//           <div>${ele.temp}°C</div>
+//         </div>
+//       </div>`
+//  })
+// })
 
 
 
