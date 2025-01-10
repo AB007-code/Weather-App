@@ -18,6 +18,7 @@ const humidityRisk = document.querySelector(".humidityRisk")
 const visibility = document.querySelector(".visibility")
 const visibilityRisk = document.querySelector(".visibilityRisk")
 const airQualityValue = document.querySelector(".airQualityValue")
+const airQualityRisk = document.querySelector(".airQualityRisk")
 let city;
 let dayArr = []
 async function trackLocation(){
@@ -187,21 +188,28 @@ const visibilityValue = data.currentConditions.visibility
 visibility.textContent = visibilityValue;
 if(visibilityValue>=0 && visibilityValue<=0.03){
   visibilityRisk.textContent = "Dense Fog"
-  
+  airQualityRisk.textContent = "Good"
 }else if(visibilityValue>=0.04 && visibilityValue<=0.16){
   visibilityRisk.textContent = "Moderate Fog"
+  airQualityRisk.textContent = "Moderate"
 }else if(visibilityValue>=0.17 && visibilityValue<=0.35){
   visibilityRisk.textContent = "Very Light Fog"
+  airQualityRisk.textContent = "Unhealthy for Sensetive Groups"
 }else if(visibilityValue>=0.36 && visibilityValue<=1.13){
   visibilityRisk.textContent = "Moderate Fog"
+  airQualityRisk.textContent = "Unhealthy"
 }else if(visibilityValue>=1.14 && visibilityValue<=2.16){
   visibilityRisk.textContent = "Light Mist"
+  airQualityRisk.textContent = "Very Unhealthy"
 }else if(visibilityValue>=2.17 && visibilityValue<=5.4){
   visibilityRisk.textContent = "Very Light Mist"
+  airQualityRisk.textContent = "Hazardous"
 }else if(visibilityValue>=5.41 && visibilityValue<=10.8){
   visibilityRisk.textContent = "Clear Air"
+  airQualityRisk.textContent = "Hazardous"
 }else{
   visibilityRisk.textContent = "Very Clear Air"
+  airQualityRisk.textContent = "Hazardous"
 }
 
 
