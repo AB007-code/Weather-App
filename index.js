@@ -6,7 +6,9 @@ const currentTime = document.querySelector(".time")
 const weather = document.querySelector(".weather")
 const per = document.querySelector(".perc")
 const img = document.querySelector(".img")
+const week_div = document.querySelector(".week_weather")
 let city;
+let dayArr = []
 async function trackLocation(){
     try{
     const res = await fetch("https://geolocation-db.com/json/")
@@ -22,7 +24,13 @@ async function trackLocation(){
     const res = await fetch(city1(city))
     const data = await res.json()
      console.log(data)
+     const dataDay = data.days
+     const sliceDay = dataDay.slice(0,6)
+     sliceDay.forEach((ele)=>{
+       dayArr.push(ele)
+     })
      setData(data)
+     console.log(sliceDay)
     }catch(err){
       console.log(err)
     }
@@ -43,11 +51,11 @@ function setData(data){
   per.textContent = "Perc - "+data.days[0].precip+"%"
  }
  let dataIcon = data.currentConditions.icon
- if(dataIcon=="partly-cloudy-day"){
+ if(dataIcon=="partly-cloudy-day" || dataIcon=="cloudy"){
   img.src = "https://i.ibb.co/PZQXH8V/27.png"
  }else if(dataIcon=="partly-cloudy-night"){
   img.src = "https://i.ibb.co/Kzkk59k/15.png"
- }else if(dataIcon=="rain"){
+ }else if(dataIcon=="rain" || dataIcon=="snow"){
   img.src = "https://i.ibb.co/kBd2NTS/39.png"
  }
  else if(dataIcon=="clear-day"){
@@ -91,15 +99,51 @@ function setData(data){
     }
  }
 currentTime.textContent = `${day},${str}`
-
+let bag = ""
+dayArr.forEach((ele)=>{
+  let date1 = new Date(`${ele.datetime}`)
+ for(let key in obj){
+  if(date1.getDay()==key){
+    day = obj[key]
+  }
+ }
+ let dayIcon = ele.icon
+ let linkSrc;
+ if(dayIcon=="partly-cloudy-day" || dayIcon=="cloudy"){
+  linkSrc = "https://i.ibb.co/PZQXH8V/27.png"
+ }else if(dayIcon=="partly-cloudy-night"){
+  linkSrc = "https://i.ibb.co/Kzkk59k/15.png"
+ }else if(dayIcon=="rain" || dayIcon=="snow"){
+  linkSrc = "https://i.ibb.co/kBd2NTS/39.png"
+ }
+ else if(dayIcon=="clear-day"){
+  linkSrc = "https://i.ibb.co/rb4rrJL/26.png"
+ }else if(dayIcon=="clear-night"){
+  linkSrc = "https://i.ibb.co/1nxNGHL/10.png"
+ }
+ bag+=`<div class="col-2">
+        <div class="h">
+          <div>${day}</div>
+          <div><img src=${linkSrc} class="img1" alt=""></div>
+          <div>${ele.temp}</div>
+        </div>
+      </div>`
+})
+week_div.innerHTML = bag
 }
 btn.addEventListener("click",()=>{
+  dayArr = []
   const city = input.value;
   async function data(){
     try{
     const res = await fetch(city1(city))
     const data = await res.json()
      console.log(data)
+     const dataDay = data.days
+     const sliceDay = dataDay.slice(0,6)
+     sliceDay.forEach((ele)=>{
+      dayArr.push(ele)
+     })
      setData(data)
     }catch(err){
       console.log(err)
