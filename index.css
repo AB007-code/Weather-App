@@ -4,8 +4,9 @@
     align-content: center;
     justify-content: center;
     height: 900px;
-    background-image: url("https://i.ibb.co/qNv7NxZ/pc.webp");
+    /* background-image: url("https://i.ibb.co/qNv7NxZ/pc.webp"); */
     background-repeat: no-repeat;
+    width:100%;
 }
 .section{
     height: 700px;

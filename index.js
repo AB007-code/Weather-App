@@ -1,3 +1,4 @@
+const div = document.querySelector(".div")
 const input = document.querySelector(".input")
 const btn = document.querySelector(".button")
 const locationInput = document.querySelector(".location")
@@ -12,6 +13,11 @@ const uvCondition = document.querySelector(".uvCondition")
 const windValue = document.querySelector(".windValue")
 const sunRise = document.querySelector(".sunRise")
 const sunSet = document.querySelector(".sunSet")
+const humidity = document.querySelector(".humidity")
+const humidityRisk = document.querySelector(".humidityRisk")
+const visibility = document.querySelector(".visibility")
+const visibilityRisk = document.querySelector(".visibilityRisk")
+const airQualityValue = document.querySelector(".airQualityValue")
 let city;
 let dayArr = []
 async function trackLocation(){
@@ -58,15 +64,20 @@ function setData(data){
  let dataIcon = data.currentConditions.icon
  if(dataIcon=="partly-cloudy-day" || dataIcon=="cloudy"){
   img.src = "https://i.ibb.co/PZQXH8V/27.png"
+  div.style.backgroundImage = `url("https://i.ibb.co/qNv7NxZ/pc.webp")`
  }else if(dataIcon=="partly-cloudy-night"){
   img.src = "https://i.ibb.co/Kzkk59k/15.png"
+  div.style.backgroundImage = `url("https://i.ibb.co/RDfPqXz/pcn.jpg")`
  }else if(dataIcon=="rain" || dataIcon=="snow"){
   img.src = "https://i.ibb.co/kBd2NTS/39.png"
+   div.style.backgroundImage = `url("https://i.ibb.co/h2p6Yhd/rain.webp")`
  }
  else if(dataIcon=="clear-day"){
   img.src = "https://i.ibb.co/rb4rrJL/26.png"
+  div.style.backgroundImage = `url("https://i.ibb.co/WGry01m/cd.jpg")`
  }else if(dataIcon=="clear-night"){
   img.src="https://i.ibb.co/1nxNGHL/10.png"
+   div.style.backgroundImage = `url("https://i.ibb.co/kqtZ1Gx/cn.jpg")`
  }
  let date = new Date()
  let hrs = date.getHours();
@@ -163,6 +174,37 @@ if(sunSethrs1 == "17"){
 }else if(sunSethrs1 == "19"){
   sunSet.textContent = `07:${sunSetmin1}pm`
 }
+const humidityValue = data.currentConditions.humidity
+humidity.textContent = humidityValue+"%"
+if(humidityValue<30){
+ humidityRisk.textContent = "Low"
+}else if(humidityValue>30 && humidityValue<50){
+  humidityRisk.textContent = "Moderate"
+}else{
+  humidityRisk.textContent = "High"
+}
+const visibilityValue = data.currentConditions.visibility
+visibility.textContent = visibilityValue;
+if(visibilityValue>=0 && visibilityValue<=0.03){
+  visibilityRisk.textContent = "Dense Fog"
+  
+}else if(visibilityValue>=0.04 && visibilityValue<=0.16){
+  visibilityRisk.textContent = "Moderate Fog"
+}else if(visibilityValue>=0.17 && visibilityValue<=0.35){
+  visibilityRisk.textContent = "Very Light Fog"
+}else if(visibilityValue>=0.36 && visibilityValue<=1.13){
+  visibilityRisk.textContent = "Moderate Fog"
+}else if(visibilityValue>=1.14 && visibilityValue<=2.16){
+  visibilityRisk.textContent = "Light Mist"
+}else if(visibilityValue>=2.17 && visibilityValue<=5.4){
+  visibilityRisk.textContent = "Very Light Mist"
+}else if(visibilityValue>=5.41 && visibilityValue<=10.8){
+  visibilityRisk.textContent = "Clear Air"
+}else{
+  visibilityRisk.textContent = "Very Clear Air"
+}
+
+
 }
 btn.addEventListener("click",()=>{
   dayArr = []
