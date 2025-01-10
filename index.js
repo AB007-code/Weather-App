@@ -7,6 +7,11 @@ const weather = document.querySelector(".weather")
 const per = document.querySelector(".perc")
 const img = document.querySelector(".img")
 const week_div = document.querySelector(".week_weather")
+const uvIndex = document.querySelector(".uvIndex")
+const uvCondition = document.querySelector(".uvCondition")
+const windValue = document.querySelector(".windValue")
+const sunRise = document.querySelector(".sunRise")
+const sunSet = document.querySelector(".sunSet")
 let city;
 let dayArr = []
 async function trackLocation(){
@@ -125,11 +130,39 @@ dayArr.forEach((ele)=>{
         <div class="h">
           <div>${day}</div>
           <div><img src=${linkSrc} class="img1" alt=""></div>
-          <div>${ele.temp}</div>
+          <div>${ele.temp}°C</div>
         </div>
       </div>`
 })
 week_div.innerHTML = bag
+uvIndex.textContent = data.currentConditions.uvindex;
+const value = data.currentConditions.uvindex
+if(value>=1 && value<=2){
+  uvCondition.textContent = "Low"
+}else if(value>=3 && value<=5){
+  uvCondition.textContent = "Moderate"
+}else if(value>=6 && value<=7){
+  uvCondition.textContent = "High"
+}else if(value>=8 && value<=10){
+  uvCondition.textContent = "Very High"
+}else{
+  uvCondition.textContent = "Extreme"
+}
+windValue.textContent = data.currentConditions.windspeed
+let sunRiseTime = data.currentConditions.sunrise
+sunRiseTime = sunRiseTime.slice(0,5)
+sunRise.textContent = sunRiseTime+"am"
+let sunSetTime = data.currentConditions.sunset
+sunSetTime = sunSetTime.slice(0,5)
+sunSethrs1 = sunSetTime.slice(0,2)
+sunSetmin1 = sunSetTime.slice(3,5)
+if(sunSethrs1 == "17"){
+  sunSet.textContent = `05:${sunSetmin1}pm`
+}else if(sunSethrs1 == "18"){
+  sunSet.textContent = `06:${sunSetmin1}pm`
+}else if(sunSethrs1 == "19"){
+  sunSet.textContent = `07:${sunSetmin1}pm`
+}
 }
 btn.addEventListener("click",()=>{
   dayArr = []
