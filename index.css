@@ -13,7 +13,7 @@ body{
     background-size: cover;
 }
 .section{
-    /* height: 700px; */
+    height: 700px;
     border-radius: 20px;
     width: 85%;
 }
