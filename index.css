@@ -1,15 +1,19 @@
+body{
+    height:1500px;
+}
 .div{
     display:flex;
     flex-wrap: wrap;
     align-content: center;
     justify-content: center;
-    height: 900px;
-    /* background-image: url("https://i.ibb.co/qNv7NxZ/pc.webp"); */
+    height: 100%;
+    background-image: url("https://i.ibb.co/qNv7NxZ/pc.webp");
     background-repeat: no-repeat;
     width:100%;
+    background-size: cover;
 }
 .section{
-    height: 700px;
+    /* height: 700px; */
     border-radius: 20px;
     width: 85%;
 }

@@ -24,7 +24,7 @@ const todayBtn = document.querySelector(".todayBtn")
 const hrsData = document.querySelector(".hrsData")
 let city;
 let dayArr = []
-let timeArr = []
+// let timeArr = []
 let oldData;
 async function trackLocation(){
     try{
@@ -48,10 +48,28 @@ async function trackLocation(){
        dayArr.push(ele)
      })
      const x = data.days[0].hours
-     x.forEach((ele)=>{
-      timeArr.push(ele)
-     })
+    //  x.forEach((ele)=>{
+    //   timeArr.push(ele)
+    //  })
      setData(data)
+    //  todayBtn.addEventListener("click",()=>{
+    //   setData(data)
+    //   let bag1 = "";
+    //   let classDiv = document.createElement("div")
+    //   classDiv.className = "row row-col-7 g-2"
+    //   x.forEach((ele)=>{
+    //    bag1+=`<div class="col">
+    //          <div class="h">
+    //            <div>${ele.datetime.slice(0,5)}</div>
+    //            <div><img src=${linkSrc} class="img1" alt=""></div>
+    //            <div>${ele.temp}°C</div>
+    //          </div>
+    //        </div>`
+    //   })
+    //   classDiv.innerHTML = bag1
+    //   hrsData.innerHTML = classDiv
+    //   todayBtn.style.color = "green"
+    //  })
      console.log(sliceDay)
     }catch(err){
       console.log(err)
@@ -222,22 +240,7 @@ if(visibilityValue>=0 && visibilityValue<=0.03){
   airQualityRisk.textContent = "Hazardous"
 }
 weekBtn.style.color = "blue"
-// todayBtn.addEventListener("click",()=>{
-//   let bag1 = "";
-//   let classDiv = document.createElement("div")
-//   classDiv.className = "row row-col-7 g-2"
-//   x.forEach((ele)=>{
-//    bag1+=`<div class="col">
-//          <div class="h">
-//            <div>${ele.datetime.slice(0,5)}</div>
-//            <div><img src=${linkSrc} class="img1" alt=""></div>
-//            <div>${ele.temp}°C</div>
-//          </div>
-//        </div>`
-//   })
-//   classDiv.innerHTML = bag1
-//   hrsData.innerHTML = classDiv
-//  })
+
 }
 btn.addEventListener("click",()=>{
   dayArr = []
@@ -262,25 +265,177 @@ btn.addEventListener("click",()=>{
       return `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${cityName}?unitGroup=metric&key=EJ6UBL2JEQGYB3AA4ENASN62J&contentType=json`
   }
 })
-function weekData(){
-  let data1 = oldData
-  return setData(data1)
-}
-weekBtn.addEventListener("click", weekData)
+// function weekData(){
+//   let data1 = oldData
+//   return setData(data1)
+// }
+// weekBtn.addEventListener("click", weekData)
+let hours = [
+  {
+    "datetime": "00:00:00",
+    "temp": -6.2,
+    "icon": "snow"
+  },
+  {
+    "datetime": "01:00:00",
+    "temp": -6.6,
+    "icon": "snow"
+  },
+  {
+    "datetime": "02:00:00",
+    "temp": -7.2,
+    "icon": "snow"
+  },
+  {
+    "datetime": "03:00:00",
+    "temp": -6.6,
+    "icon": "snow"
+  },
+  {
+    "datetime": "04:00:00",
+    "temp": -6.6,
+    "icon": "snow"
+  },
+  {
+    "datetime": "05:00:00",
+    "temp": -6.6,
+    "icon": "cloudy"
+  },
+  {
+    "datetime": "06:00:00",
+    "temp": -6.6,
+    "icon": "cloudy"
+  },
+  {
+    "datetime": "07:00:00",
+    "temp": -6.1,
+    "icon": "cloudy"
+  },
+  {
+    "datetime": "08:00:00",
+    "temp": -6.1,
+    "icon": "cloudy"
+  },
+  {
+    "datetime": "09:00:00",
+    "temp": -5,
+    "icon": "partly-cloudy-day"
+  },
+  {
+    "datetime": "10:00:00",
+    "temp": -3.8,
+    "icon": "partly-cloudy-day"
+  },
+  {
+    "datetime": "11:00:00",
+    "temp": -3.3,
+    "icon": "partly-cloudy-day"
+  },
+  {
+    "datetime": "13:00:00",
+    "temp": -2.2,
+    "icon": "cloudy"
+  },
+  {
+    "datetime": "14:00:00",
+    "temp": -2.2,
+    "icon": "partly-cloudy-day"
+  },
+  {
+    "datetime": "15:00:00",
+    "temp": -2.2,
+    "icon": "partly-cloudy-day"
+  },
+  {
+    "datetime": "16:00:00",
+    "temp": -2.2,
+    "icon": "partly-cloudy-day"
+  },
+  {
+    "datetime": "17:00:00",
+    "temp": -2.7,
+    "icon": "partly-cloudy-day"
+  },
+  {
+    "datetime": "18:00:00",
+    "temp": -3.8,
+    "icon": "partly-cloudy-night"
+  },
+  {
+    "datetime": "19:00:00",
+    "temp": -5,
+    "icon": "partly-cloudy-night"
+  },
+  {
+    "datetime": "20:00:00",
+    "temp": -6.1,
+    "icon": "partly-cloudy-night"
+  },
+  {
+    "datetime": "21:00:00",
+    "temp": -7.2,
+    "icon": "partly-cloudy-night"
+  },
+  {
+    "datetime": "22:00:00",
+    "temp": -8.3,
+    "icon": "partly-cloudy-night"
+  },
+  {
+    "datetime": "23:00:00",
+    "temp": -8.8,
+    "icon": "partly-cloudy-night"
+  }
+]
+todayBtn.addEventListener("click",()=>{
+  let bag1 = "";
+  let classDiv = document.createElement("div")
+  classDiv.className = "row row-col-7 g-2"
+  hours.forEach((ele)=>{
+    let dayIcon = ele.icon
+ let linkSrc;
+ if(dayIcon=="partly-cloudy-day" || dayIcon=="cloudy"){
+  linkSrc = "https://i.ibb.co/PZQXH8V/27.png"
+ }else if(dayIcon=="partly-cloudy-night"){
+  linkSrc = "https://i.ibb.co/Kzkk59k/15.png"
+ }else if(dayIcon=="rain" || dayIcon=="snow"){
+  linkSrc = "https://i.ibb.co/kBd2NTS/39.png"
+ }
+ else if(dayIcon=="clear-day"){
+  linkSrc = "https://i.ibb.co/rb4rrJL/26.png"
+ }else if(dayIcon=="clear-night"){
+  linkSrc = "https://i.ibb.co/1nxNGHL/10.png"
+ }
+   bag1+=`<div class="col">
+         <div class="h">
+           <div>${ele.datetime.slice(0,5)}</div>
+           <div><img src=${linkSrc} class="img1" alt=""></div>
+           <div>${ele.temp}°C</div>
+         </div>
+       </div>`
+  })
+  classDiv.innerHTML = bag1
+  hrsData.appendChild(classDiv)
+  todayBtn.style.color = "green"
+ })
 // todayBtn.addEventListener("click",()=>{
-//  let bag1 = "";
-//  let classDiv = document.createElement("div")
-//  classDiv.className = "row row-col-7 g-2"
-//  x.forEach((ele)=>{
-//   bag1+=`<div class="col">
-//         <div class="h">
-//           <div>${day}</div>
-//           <div><img src=${linkSrc} class="img1" alt=""></div>
-//           <div>${ele.temp}°C</div>
-//         </div>
-//       </div>`
+//   setData(data)
+//   let bag1 = "";
+//   let classDiv = document.createElement("div")
+//   classDiv.className = "row row-col-7 g-2"
+//   x.forEach((ele)=>{
+//    bag1+=`<div class="col">
+//          <div class="h">
+//            <div>${ele.datetime.slice(0,5)}</div>
+//            <div><img src=${linkSrc} class="img1" alt=""></div>
+//            <div>${ele.temp}°C</div>
+//          </div>
+//        </div>`
+//   })
+//   classDiv.innerHTML = bag1
+//   hrsData.innerHTML = classDiv
+//   todayBtn.style.color = "green"
 //  })
-// })
 
 
 
