@@ -2,6 +2,8 @@ const div = document.querySelector(".div")
 const sec = document.querySelector(".section")
 const input = document.querySelector(".input")
 const btn = document.querySelector(".button")
+const btn3 = document.querySelector(".btn3")
+const btn4 = document.querySelector(".btn4")
 const locationInput = document.querySelector(".location")
 const currentTemp = document.querySelector(".currentTemp")
 const currentTime = document.querySelector(".time")
@@ -30,6 +32,7 @@ let classDiv = document.createElement("div")
 let city;
 let dayArr = []
 let timeArr = []
+let tempData = 0
 async function trackLocation(){
     try{
     const res = await fetch("https://geolocation-db.com/json/")
@@ -44,7 +47,7 @@ async function trackLocation(){
     try{
     const res = await fetch(city1(city))
     const data = await res.json()
-    
+    tempData = data
      console.log(data)
      const dataDay = data.days
      const sliceDay = dataDay.slice(0,6)
@@ -69,7 +72,7 @@ async function trackLocation(){
 trackLocation()
 function setData(data){
  locationInput.textContent = data.resolvedAddress;
- currentTemp.textContent = data.currentConditions.temp
+ currentTemp.textContent = data.currentConditions.temp+"°C"
  weather.textContent = data.currentConditions.conditions
  if(data.days[0].precip==0){
  per.textContent = "Perc - Null%"
@@ -156,7 +159,7 @@ dayArr.forEach((ele)=>{
         <div class="h">
           <div>${day}</div>
           <div><img src=${linkSrc} class="img1" alt=""></div>
-          <div>${ele.temp}°C</div>
+          <div class="changeTemp">${ele.temp}°C</div>
         </div>
       </div>`
 })
@@ -226,17 +229,19 @@ if(visibilityValue>=0 && visibilityValue<=0.03){
   airQualityRisk.textContent = "Hazardous"
 }
 weekBtn.style.color = "blue"
-
+btn3.style.backgroundColor = "black"
 }
 btn.addEventListener("click",()=>{
   dayArr = []
   timeArr = []
+  tempData = 0
   const city = input.value;
   async function data(){
     try{
     const res = await fetch(city1(city))
     const data = await res.json()
      console.log(data)
+     tempData = data
      const dataDay = data.days
      const sliceDay = dataDay.slice(0,6)
      sliceDay.forEach((ele)=>{
@@ -256,7 +261,7 @@ btn.addEventListener("click",()=>{
       return `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${cityName}?unitGroup=metric&key=8NBU7YB4UXCK38TRLYL7WT8Z3&contentType=json`
   }
 })
-
+let todayArr = []
 todayBtn.addEventListener("click",()=>{
   let bag1 = "";
   timeArr.forEach((ele)=>{
@@ -278,17 +283,21 @@ todayBtn.addEventListener("click",()=>{
          <div class="h">
            <div>${ele.datetime.slice(0,5)}</div>
            <div><img src=${linkSrc} class="img1" alt=""></div>
-           <div>${ele.temp}°C</div>
+           <div class="changeTemp1">${ele.temp}°C</div>
          </div>
        </div>`
   })
   classDiv.innerHTML = bag1
   hrsData.replaceChild(classDiv,week_div)
+  let elem = document.querySelectorAll(".changeTemp1")
+  elem.forEach((ele)=>{
+   todayArr.push(ele)
+  })
   todayBtn.style.color = "blue"
   weekBtn.style.color = "white"
   sec.style.height = "auto"
  })
-
+ let weekArr = []
  weekBtn.addEventListener("click",()=>{
   let obj = {
     0:"Sunday",
@@ -325,13 +334,46 @@ dayArr.forEach((ele)=>{
         <div class="h">
           <div>${day}</div>
           <div><img src=${linkSrc} class="img1" alt=""></div>
-          <div>${ele.temp}°C</div>
+          <div class="changeTemp">${ele.temp}°C</div>
         </div>
       </div>`
 })
   week_div.innerHTML = bag
   hrsData.replaceChild(week_div,classDiv)
+  let element1 = document.querySelectorAll(".changeTemp")
+  element1.forEach((ele)=>{
+   weekArr.push(ele)
+  })
   todayBtn.style.color = "white"
   weekBtn.style.color = "blue"
   sec.style.height = "700px"
  })
+const y = document.getElementsByClassName("changeTemp")
+const x = document.getElementsByClassName("changeTemp1")
+btn3.addEventListener("click",()=>{
+  currentTemp.textContent = tempData.currentConditions.temp+"°C"
+  timeArr.forEach((ele,i)=>{
+    x[i].textContent = ele.temp+"°C"
+  })
+  dayArr.forEach((ele,j)=>{
+    y[j].innerHTML = ele.temp+"°C"
+   })
+})
+btn3.addEventListener("click",()=>{
+  currentTemp.textContent = tempData.currentConditions.temp+"°C"
+  dayArr.forEach((ele,j)=>{
+    y[j].innerHTML = ele.temp+"°C"
+   })
+})
+btn4.addEventListener("click",()=>{
+  currentTemp.textContent = ((tempData.currentConditions.temp*9/5)+32)+"°F"
+  timeArr.forEach((ele,i)=>{
+    x[i].textContent = ((ele.temp*9/5)+32).toString().slice(0,5)+"°F"
+  })
+})
+btn4.addEventListener("click",()=>{
+  currentTemp.textContent = ((tempData.currentConditions.temp*9/5)+32)+"°F"
+  dayArr.forEach((ele,j)=>{
+    y[j].textContent = ((ele.temp*9/5)+32).toString().slice(0,5)+"°F"
+   })
+})

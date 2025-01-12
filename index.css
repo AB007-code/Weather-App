@@ -1,5 +1,5 @@
 body{
-    height:1500px;
+    height:1100px;
 }
 .div{
     display:flex;
@@ -39,11 +39,11 @@ body{
 .font{
     font-size: 5em;
 }
-.psuedo::after{
+/* .psuedo::after{
  content: "°C";
  font-size:2.5em;
  transform: translate(5%,10%);
-}
+} */
 .time{
     margin-top: -20px;
     font-size: 1.15em;
