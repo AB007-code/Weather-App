@@ -355,25 +355,33 @@ btn3.addEventListener("click",()=>{
   timeArr.forEach((ele,i)=>{
     x[i].textContent = ele.temp+"°C"
   })
-  dayArr.forEach((ele,j)=>{
-    y[j].innerHTML = ele.temp+"°C"
-   })
+  // dayArr.forEach((ele,j)=>{
+  //   y[j].innerHTML = ele.temp+"°C"
+  //  })
+   btn4.style.backgroundColor="white"
+   btn3.style.backgroundColor="yellow"
 })
 btn3.addEventListener("click",()=>{
   currentTemp.textContent = tempData.currentConditions.temp+"°C"
   dayArr.forEach((ele,j)=>{
     y[j].innerHTML = ele.temp+"°C"
    })
+    btn4.style.backgroundColor="white"
+    btn3.style.backgroundColor="yellow"
 })
 btn4.addEventListener("click",()=>{
   currentTemp.textContent = ((tempData.currentConditions.temp*9/5)+32)+"°F"
   timeArr.forEach((ele,i)=>{
     x[i].textContent = ((ele.temp*9/5)+32).toString().slice(0,5)+"°F"
   })
+  btn3.style.backgroundColor="white"
+  btn4.style.backgroundColor="yellow"
 })
 btn4.addEventListener("click",()=>{
   currentTemp.textContent = ((tempData.currentConditions.temp*9/5)+32)+"°F"
   dayArr.forEach((ele,j)=>{
     y[j].textContent = ((ele.temp*9/5)+32).toString().slice(0,5)+"°F"
    })
+    btn3.style.backgroundColor="white"
+    btn4.style.backgroundColor="yellow"
 })
