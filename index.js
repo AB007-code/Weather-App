@@ -27,8 +27,6 @@ const todayBtn = document.querySelector(".todayBtn")
 const hrsData = document.querySelector(".hrsData")
 let classDiv = document.createElement("div")
   classDiv.className = "row row-col-7 g-2"
-// let classDiv1 = document.createElement("div")
-//   classDiv1.className = "row gx-2 "
 let city;
 let dayArr = []
 let timeArr = []
@@ -355,9 +353,6 @@ btn3.addEventListener("click",()=>{
   timeArr.forEach((ele,i)=>{
     x[i].textContent = ele.temp+"°C"
   })
-  // dayArr.forEach((ele,j)=>{
-  //   y[j].innerHTML = ele.temp+"°C"
-  //  })
    btn4.style.backgroundColor="white"
    btn3.style.backgroundColor="yellow"
 })
@@ -370,7 +365,7 @@ btn3.addEventListener("click",()=>{
     btn3.style.backgroundColor="yellow"
 })
 btn4.addEventListener("click",()=>{
-  currentTemp.textContent = ((tempData.currentConditions.temp*9/5)+32)+"°F"
+  currentTemp.textContent = ((tempData.currentConditions.temp*9/5)+32).toString().slice(0,5)+"°F"
   timeArr.forEach((ele,i)=>{
     x[i].textContent = ((ele.temp*9/5)+32).toString().slice(0,5)+"°F"
   })
@@ -378,7 +373,7 @@ btn4.addEventListener("click",()=>{
   btn4.style.backgroundColor="yellow"
 })
 btn4.addEventListener("click",()=>{
-  currentTemp.textContent = ((tempData.currentConditions.temp*9/5)+32)+"°F"
+  currentTemp.textContent = ((tempData.currentConditions.temp*9/5)+32).toString().slice(0,5)+"°F"
   dayArr.forEach((ele,j)=>{
     y[j].textContent = ((ele.temp*9/5)+32).toString().slice(0,5)+"°F"
    })
